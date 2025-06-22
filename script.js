@@ -298,29 +298,57 @@ class BillangStudio {
                 const newLeftChannel = newBuffer.getChannelData(0);
                 const newRightChannel = newBuffer.getChannelData(1);
 
-                // Técnica simple de cancelación de fase para voces
-                const vocalReduction = 0.7; // Reducción moderada
+                // Filtro de paso bajo para preservar bajos
+                const sampleRate = buffer.sampleRate;
+                const bassCutoff = 200; // Hz - frecuencia de corte para bajos
+                const alpha = bassCutoff / (bassCutoff + sampleRate);
+                
+                let leftBassFiltered = 0;
+                let rightBassFiltered = 0;
                 
                 for (let i = 0; i < buffer.length; i++) {
                     // Calcular canales mid y side
                     const mid = (leftChannel[i] + rightChannel[i]) / 2;
                     const side = (leftChannel[i] - rightChannel[i]) / 2;
                     
-                    // Reducir solo el canal medio (donde están las voces)
-                    const processedMid = mid * (1 - vocalReduction);
+                    // Aplicar filtro de paso bajo para extraer bajos
+                    leftBassFiltered = alpha * leftChannel[i] + (1 - alpha) * leftBassFiltered;
+                    rightBassFiltered = alpha * rightChannel[i] + (1 - alpha) * rightBassFiltered;
+                    
+                    // Separar bajos del canal medio
+                    const midBass = (leftBassFiltered + rightBassFiltered) / 2;
+                    const midVocals = mid - midBass;
+                    
+                    // Eliminar voces pero preservar bajos
+                    const processedMid = midBass + (midVocals * 0.0); // Voces eliminadas, bajos preservados
                     
                     // Reconstruir canales estéreo
                     newLeftChannel[i] = processedMid + side;
                     newRightChannel[i] = processedMid - side;
                 }
             } else {
-                // Para audio mono, reducir volumen general
+                // Para audio mono, usar filtro de frecuencias
                 const channelData = buffer.getChannelData(0);
                 const newChannelData = newBuffer.getChannelData(0);
                 
+                // Filtro de paso bajo para preservar bajos
+                const sampleRate = buffer.sampleRate;
+                const bassCutoff = 150; // Hz
+                const alpha = bassCutoff / (bassCutoff + sampleRate);
+                
+                let bassFiltered = 0;
+                
                 for (let i = 0; i < buffer.length; i++) {
-                    // Reducción moderada para mono
-                    newChannelData[i] = channelData[i] * 0.6;
+                    const currentSample = channelData[i];
+                    
+                    // Filtro de paso bajo para extraer bajos
+                    bassFiltered = alpha * currentSample + (1 - alpha) * bassFiltered;
+                    
+                    // Separar bajos de voces
+                    const vocals = currentSample - bassFiltered;
+                    
+                    // Preservar bajos, eliminar voces
+                    newChannelData[i] = bassFiltered + (vocals * 0.0);
                 }
             }
 
