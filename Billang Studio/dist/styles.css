@@ -1,0 +1,294 @@
+/* Billang Studio - Estilos Personalizados */
+
+:root {
+    --primary-color: #007bff;
+    --secondary-color: #6c757d;
+    --success-color: #28a745;
+    --warning-color: #ffc107;
+    --danger-color: #dc3545;
+    --info-color: #17a2b8;
+    --dark-color: #343a40;
+    --light-color: #f8f9fa;
+}
+
+body {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Navbar Styles */
+.navbar-brand {
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+/* Card Styles */
+.card {
+    border: none;
+    border-radius: 15px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+    border-bottom: none;
+    font-weight: 600;
+}
+
+/* Upload Area Styles */
+.upload-area {
+    border: 3px dashed var(--primary-color);
+    border-radius: 15px;
+    padding: 3rem;
+    text-align: center;
+    background: rgba(0, 123, 255, 0.05);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    min-height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.upload-area:hover {
+    background: rgba(0, 123, 255, 0.1);
+    border-color: var(--success-color);
+    transform: scale(1.02);
+}
+
+.upload-area.dragover {
+    background: rgba(40, 167, 69, 0.2);
+    border-color: var(--success-color);
+    transform: scale(1.05);
+}
+
+.upload-content {
+    pointer-events: none;
+}
+
+.upload-content button {
+    pointer-events: all;
+}
+
+/* Audio Player Styles */
+audio {
+    border-radius: 10px;
+    background: var(--light-color);
+}
+
+audio::-webkit-media-controls-panel {
+    background: var(--light-color);
+}
+
+audio::-webkit-media-controls-play-button {
+    background: var(--primary-color);
+    border-radius: 50%;
+}
+
+/* Slider Styles */
+.form-range::-webkit-slider-thumb {
+    background: var(--primary-color);
+    border-radius: 50%;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.form-range::-webkit-slider-track {
+    background: var(--light-color);
+    border-radius: 10px;
+}
+
+/* Button Styles */
+.btn {
+    border-radius: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    border: none;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.btn-primary {
+    background: linear-gradient(45deg, var(--primary-color), #0056b3);
+}
+
+.btn-success {
+    background: linear-gradient(45deg, var(--success-color), #1e7e34);
+}
+
+.btn-warning {
+    background: linear-gradient(45deg, var(--warning-color), #e0a800);
+}
+
+/* Progress Bar Styles */
+.progress {
+    height: 10px;
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.1);
+}
+
+.progress-bar {
+    border-radius: 10px;
+    background: linear-gradient(45deg, var(--info-color), var(--primary-color));
+}
+
+/* Switch Styles */
+.form-check-input:checked {
+    background-color: var(--success-color);
+    border-color: var(--success-color);
+}
+
+.form-check-input:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+/* Badge Styles */
+.badge {
+    font-size: 0.9rem;
+    padding: 0.5rem 0.8rem;
+    border-radius: 20px;
+}
+
+/* Alert Styles */
+.alert {
+    border: none;
+    border-radius: 10px;
+    border-left: 4px solid var(--info-color);
+}
+
+/* Footer Styles */
+footer {
+    margin-top: auto;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .upload-area {
+        padding: 2rem;
+        min-height: 150px;
+    }
+    
+    .display-4 {
+        font-size: 2.5rem;
+    }
+    
+    .card-body {
+        padding: 1.5rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .container {
+        padding: 0 15px;
+    }
+    
+    .upload-area {
+        padding: 1.5rem;
+        min-height: 120px;
+    }
+    
+    .display-4 {
+        font-size: 2rem;
+    }
+}
+
+/* Animation Classes */
+.fade-in {
+    animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.slide-up {
+    animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Loading Spinner */
+.spinner-border {
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+/* File Info Styles */
+.file-info {
+    background: linear-gradient(45deg, var(--info-color), var(--primary-color));
+    color: white;
+    border-radius: 10px;
+    padding: 1rem;
+    margin-top: 1rem;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--light-color);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #0056b3;
+}
+
+/* Focus Styles */
+.form-control:focus,
+.form-select:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+/* Disabled States */
+.btn:disabled {
+    opacity: 0.6;
+    transform: none;
+    box-shadow: none;
+}
+
+/* Success States */
+.processing-complete {
+    background: linear-gradient(45deg, var(--success-color), #1e7e34);
+    color: white;
+}
+
+/* Error States */
+.processing-error {
+    background: linear-gradient(45deg, var(--danger-color), #c82333);
+    color: white;
+} 

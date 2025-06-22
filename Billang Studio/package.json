@@ -1,0 +1,24 @@
+{
+  "name": "billang-studio",
+  "version": "1.0.0",
+  "description": "Procesador de audio para cambiar tonalidad y crear karaoke.",
+  "main": "script.js",
+  "scripts": {
+    "dev": "live-server",
+    "build": "shx rm -rf dist && shx mkdir dist && shx cp -r *.html *.css *.js dist/"
+  },
+  "keywords": [
+    "audio",
+    "processing",
+    "pitch",
+    "karaoke"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "live-server": "^1.2.2"
+  },
+  "devDependencies": {
+    "shx": "^0.3.4"
+  }
+} 
