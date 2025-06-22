@@ -298,22 +298,29 @@ class BillangStudio {
                 const newLeftChannel = newBuffer.getChannelData(0);
                 const newRightChannel = newBuffer.getChannelData(1);
 
+                // Técnica simple de cancelación de fase para voces
+                const vocalReduction = 0.7; // Reducción moderada
+                
                 for (let i = 0; i < buffer.length; i++) {
-                    // Técnica de cancelación de fase para eliminar voces
+                    // Calcular canales mid y side
                     const mid = (leftChannel[i] + rightChannel[i]) / 2;
                     const side = (leftChannel[i] - rightChannel[i]) / 2;
                     
-                    // Reducir el canal medio (donde suelen estar las voces)
-                    newLeftChannel[i] = side * 0.7;
-                    newRightChannel[i] = side * 0.7;
+                    // Reducir solo el canal medio (donde están las voces)
+                    const processedMid = mid * (1 - vocalReduction);
+                    
+                    // Reconstruir canales estéreo
+                    newLeftChannel[i] = processedMid + side;
+                    newRightChannel[i] = processedMid - side;
                 }
             } else {
-                // Para audio mono, simplemente reducir el volumen
+                // Para audio mono, reducir volumen general
                 const channelData = buffer.getChannelData(0);
                 const newChannelData = newBuffer.getChannelData(0);
                 
                 for (let i = 0; i < buffer.length; i++) {
-                    newChannelData[i] = channelData[i] * 0.5;
+                    // Reducción moderada para mono
+                    newChannelData[i] = channelData[i] * 0.6;
                 }
             }
 
